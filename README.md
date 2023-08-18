@@ -1,4 +1,5 @@
 # camera_calibration
+![demo fig](docs/img/dotResult.png)
 
 ## Description
 The function in this package is for checking the current camera parameters.  An ideal camera will have a constant ratio between the real distance and pixel distance. The fuction contained in this package could also telling the ratio under known environment.
@@ -9,9 +10,8 @@ The function in this package is for checking the current camera parameters.  An 
 - Input the real distance in cmd/terminal used.
 - Click on the 4 out most corner dots' center for perspective transformation calculation. 
 __Dot Sequence Matters, please follow the steps below.__
-![dot_sequence](dot_sequence.png)
+![dot_sequence](docs/img/dot_sequence.png)
 - Click on 2 horizontal or vertical adjacent dots for ratio calculation.
-![dot_result](dotResult.png)
 
 ## Items in Package
 - ``dotField.pdf
