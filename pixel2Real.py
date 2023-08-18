@@ -86,8 +86,10 @@ def click_event(event, x, y, flags, param):
                     cv2.putText(img, f"{scale:.6f}", (txt_x, txt_y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
                     cv2.imshow('image', img)
 
-
+# Read Image Here
 img = cv2.imread('RS_dots_Color.png')
+
+# Scaling Percentage
 scale_percent = 100
 
 img = resize_image(img, scale_percent)
