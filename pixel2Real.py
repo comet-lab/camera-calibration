@@ -47,6 +47,30 @@ def find_red_dots_centers(img):
     
     return centers
 
+def find_blue_dots_centers(img):
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    
+    lower_blue_1 = np.array([90, 50, 50])  # Lighter blue
+    upper_blue_1 = np.array([130, 255, 255])
+    lower_blue_2 = np.array([130, 50, 50])  # Darker blue
+    upper_blue_2 = np.array([220, 255, 255])
+    
+    mask1 = cv2.inRange(hsv, lower_blue_1, upper_blue_1)
+    mask2 = cv2.inRange(hsv, lower_blue_2, upper_blue_2)
+    mask = cv2.bitwise_or(mask1, mask2)
+    
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    
+    centers = []
+    for contour in contours:
+        M = cv2.moments(contour)
+        if M["m00"] != 0:
+            cx = int(M["m10"] / M["m00"])
+            cy = int(M["m01"] / M["m00"])
+            centers.append((cx, cy))
+    
+    return centers
+
 def is_near_center(x, y, centers):
     for cx, cy in centers:
         distance = np.sqrt((cx - x)**2 + (cy - y)**2)
@@ -71,9 +95,10 @@ def click_event(event, x, y, flags, param):
                 print('init done')
                 red_dot_centers = find_red_dots_centers(img)
         else:
-            center = is_near_center(x, y, red_dot_centers)
+            blue_dot_centers = find_blue_dots_centers(img)
+            center = is_near_center(x, y, blue_dot_centers)
             if center:
-                cv2.circle(img, center, 5, (255, 0, 0), -1)
+                cv2.circle(img, center, 5, (0, 255, 0), -1)
                 points.append(center)
 
                 if (len(points)%2) == 0:
@@ -87,7 +112,7 @@ def click_event(event, x, y, flags, param):
                     cv2.imshow('image', img)
 
 # Read Image Here
-img = cv2.imread('RS_dots_Color.png')
+img = cv2.imread('dot_Color.png')
 
 # Scaling Percentage
 scale_percent = 100
