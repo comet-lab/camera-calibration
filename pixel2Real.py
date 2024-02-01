@@ -98,7 +98,7 @@ def click_event(event, x, y, flags, param):
             blue_dot_centers = find_blue_dots_centers(img)
             center = is_near_center(x, y, blue_dot_centers)
             if center:
-                cv2.circle(img, center, 5, (0, 255, 0), -1)
+                cv2.circle(img, center, 2, (0, 100, 0), -1)
                 points.append(center)
 
                 if (len(points)%2) == 0:
@@ -112,7 +112,7 @@ def click_event(event, x, y, flags, param):
                     cv2.imshow('image', img)
 
 # Read Image Here
-img = cv2.imread('RS_dots_Color.png')
+img = cv2.imread('test_pic/dot_Color.png')
 
 # Scaling Percentage
 scale_percent = 100
