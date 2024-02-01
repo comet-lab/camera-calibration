@@ -112,7 +112,7 @@ def click_event(event, x, y, flags, param):
                     cv2.imshow('image', img)
 
 # Read Image Here
-img = cv2.imread('dot_Color.png')
+img = cv2.imread('RS_dots_Color.png')
 
 # Scaling Percentage
 scale_percent = 100
